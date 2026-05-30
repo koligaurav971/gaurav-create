@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: Bricolage Grotesque;
+    --font-body: General Sans;
+    --font-mono: Geist Mono;
+    --radius: 0.25rem;
+
+    --background: 0.065 0.002 240;
+    --foreground: 0.96 0.001 0;
+    --card: 0.08 0.001 240;
+    --card-foreground: 0.94 0.002 280;
+    --popover: 0.1 0.001 240;
+    --popover-foreground: 0.96 0.001 0;
+
+    --primary: 0.5 0.18 275;
+    --primary-foreground: 0.95 0 0;
+
+    --secondary: 0.42 0.25 200;
+    --secondary-foreground: 0.96 0 0;
+    --muted: 0.15 0.001 240;
+    --muted-foreground: 0.5 0.001 240;
+
+    --accent: 0.55 0.29 290;
+    --accent-foreground: 0.05 0 0;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.95 0 0;
+
+    --border: 0.12 0.003 270;
+    --input: 0.1 0.002 240;
+    --ring: 0.55 0.25 290;
+
+    --chart-1: 0.55 0.3 290;
+    --chart-2: 0.52 0.28 200;
+    --chart-3: 0.6 0.25 180;
+    --chart-4: 0.5 0.24 60;
+    --chart-5: 0.65 0.22 340;
+
+    --sidebar: 0.08 0.001 240;
+    --sidebar-foreground: 0.94 0.002 280;
+    --sidebar-primary: 0.55 0.25 290;
+    --sidebar-primary-foreground: 0.05 0 0;
+    --sidebar-accent: 0.52 0.28 200;
+    --sidebar-accent-foreground: 0.95 0 0;
+    --sidebar-border: 0.12 0.003 270;
+    --sidebar-ring: 0.55 0.25 290;
+  }
+
+  .dark {
+    --background: 0.065 0.002 240;
+    --foreground: 0.96 0.001 0;
+    --card: 0.08 0.001 240;
+    --card-foreground: 0.94 0.002 280;
+    --popover: 0.1 0.001 240;
+    --popover-foreground: 0.96 0.001 0;
+
+    --primary: 0.65 0.25 290;
+    --primary-foreground: 0.08 0 0;
+
+    --secondary: 0.55 0.28 200;
+    --secondary-foreground: 0.95 0 0;
+    --muted: 0.15 0.001 240;
+    --muted-foreground: 0.5 0.001 240;
+
+    --accent: 0.65 0.3 285;
+    --accent-foreground: 0.05 0 0;
+
+    --destructive: 0.65 0.25 25;
+    --destructive-foreground: 0.95 0 0;
+
+    --border: 0.12 0.003 270;
+    --input: 0.1 0.002 240;
+    --ring: 0.65 0.28 285;
+
+    --chart-1: 0.65 0.3 290;
+    --chart-2: 0.6 0.3 200;
+    --chart-3: 0.7 0.25 180;
+    --chart-4: 0.65 0.28 60;
+    --chart-5: 0.75 0.25 340;
+
+    --sidebar: 0.08 0.001 240;
+    --sidebar-foreground: 0.94 0.002 280;
+    --sidebar-primary: 0.65 0.25 290;
+    --sidebar-primary-foreground: 0.08 0 0;
+    --sidebar-accent: 0.55 0.28 200;
+    --sidebar-accent-foreground: 0.95 0 0;
+    --sidebar-border: 0.12 0.003 270;
+    --sidebar-ring: 0.65 0.25 290;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+  }
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(157, 0, 255, 0.4);
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
+  }
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(157, 0, 255, 0.4);
+  }
+  .shadow-glow-lg {
+    box-shadow: 0 0 40px rgba(157, 0, 255, 0.5);
+  }
+  .shadow-glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+  }
+  .shadow-glow-purple {
+    box-shadow: 0 0 20px rgba(157, 0, 255, 0.4);
+  }
+  .shadow-glow-blue {
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
+  }
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+  }
+  .text-glow-purple {
+    text-shadow: 0 0 20px rgba(157, 0, 255, 0.8);
+  }
+  .cursor-glow {
+    cursor: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@theme {
+  --glow-neon-purple: 0.65 0.3 290;
+  --glow-cyan: 0.6 0.25 180;
+  --glow-electric-blue: 0.52 0.28 200;
+}

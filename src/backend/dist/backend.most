@@ -1,0 +1,129 @@
+// Version: 1.0.0
+type Announcement__160704614 =
+  {content : Text; createdAt : Int; id : Nat; room : ?ChatRoom__945781034};
+type BlogPost__72627970 =
+  {
+    content : Text;
+    createdAt : Int;
+    excerpt : Text;
+    id : Nat;
+    isPublished : Bool;
+    title : Text
+  };
+type ChatMessage__559859432 =
+  {
+    content : Text;
+    id : Nat;
+    isDeleted : Bool;
+    isPinned : Bool;
+    reactions : [(Text, Nat)];
+    room : ChatRoom__945781034;
+    sender : Principal;
+    senderName : Text;
+    timestamp : Int
+  };
+type ChatRoom__945781034 = {#Free; #Premium; #VIP};
+type MembershipTier__911007801 = {#Free; #Premium; #VIP};
+type ModerationAction__26038040 =
+  {
+    #AutoFlagLink;
+    #AutoFlagProfanity;
+    #AutoFlagScam;
+    #AutoFlagSpam;
+    #DeleteMessage;
+    #FlagSuspiciousActivity;
+    #MuteUser;
+    #PinMessage;
+    #UnpinMessage
+  };
+type ModerationLog__889723365 =
+  {
+    action : ModerationAction__26038040;
+    id : Nat;
+    reason : Text;
+    targetMessageId : ?Nat;
+    targetPrincipal : ?Principal;
+    timestamp : Int
+  };
+type MutedUser__240437585 =
+  {mutedUntil : Int; principal : Principal; reason : Text};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Project__614212307 =
+  {
+    category : Text;
+    contentUrl : Text;
+    createdAt : Int;
+    description : Text;
+    id : Nat;
+    isFeatured : Bool;
+    isFree : Bool;
+    isTrending : Bool;
+    thumbnailUrl : Text;
+    title : Text;
+    viewCount : Nat
+  };
+type UserProfile__277265826 =
+  {
+    avatarUrl : Text;
+    joinedAt : Int;
+    principal : Principal;
+    tier : MembershipTier__911007801;
+    username : Text
+  };
+actor {
+  stable announcementState : {var nextId : Nat};
+  stable announcements :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Announcement__160704614]];
+      var elementIndex : Nat__490723111
+    };
+  stable blogPosts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?BlogPost__72627970]];
+      var elementIndex : Nat__490723111
+    };
+  stable blogState : {var nextId : Nat};
+  stable chatState : {var nextId : Nat};
+  stable lastSeen :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?(Principal, Int)]];
+      var elementIndex : Nat__490723111
+    };
+  stable messages :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ChatMessage__559859432]];
+      var elementIndex : Nat__490723111
+    };
+  stable modState : {var nextModId : Nat};
+  stable moderationLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ModerationLog__889723365]];
+      var elementIndex : Nat__490723111
+    };
+  stable mutedUsers :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?MutedUser__240437585]];
+      var elementIndex : Nat__490723111
+    };
+  stable ownerState : {var principal : ?Principal};
+  stable projectState : {var nextId : Nat};
+  stable projects :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Project__614212307]];
+      var elementIndex : Nat__490723111
+    };
+  stable users :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?UserProfile__277265826]];
+      var elementIndex : Nat__490723111
+    }
+};

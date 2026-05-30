@@ -1,0 +1,26 @@
+{
+  "overview": "Gaurav.Create is an ultra-premium futuristic creator platform with cyberpunk aesthetics, project marketplace, real-time community chat, membership tiers, and an owner-only dashboard.",
+  "features": [
+    "Cinematic cyberpunk homepage with animated hero, live stats, and featured projects",
+    "Internet Identity authentication with premium sign-in experience and user profiles",
+    "Project marketplace with search, filters, category browsing, and detail pages",
+    "Real-time community chat with Free/Premium/VIP rooms, emoji reactions, and typing indicators",
+    "Owner-only dashboard for project management, chat moderation, and announcements",
+    "Automated chat moderation with spam detection, profanity filtering, and anti-scam protection",
+    "Membership tier system (FREE/PREMIUM/VIP) with animated badges",
+    "Social media integration for YouTube, Instagram, and Discord",
+    "Floating dock navigation, custom glow cursor, and premium micro-animations"
+  ],
+  "category": "creator-platform",
+  "tags": [
+    "cyberpunk",
+    "creator",
+    "marketplace",
+    "community",
+    "chat",
+    "membership",
+    "futuristic",
+    "dark-theme"
+  ],
+  "last_updated": "2026-05-26T08:13:55.834Z"
+}

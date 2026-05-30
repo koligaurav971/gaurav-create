@@ -1,0 +1,217 @@
+type UserProfile = 
+ record {
+   avatarUrl: text;
+   joinedAt: int;
+   "principal": principal;
+   tier: MembershipTier;
+   username: text;
+ };
+type Project = 
+ record {
+   category: text;
+   contentUrl: text;
+   createdAt: int;
+   description: text;
+   id: nat;
+   isFeatured: bool;
+   isFree: bool;
+   isTrending: bool;
+   thumbnailUrl: text;
+   title: text;
+   viewCount: nat;
+ };
+type MutedUser = 
+ record {
+   mutedUntil: int;
+   "principal": principal;
+   reason: text;
+ };
+type ModerationLog = 
+ record {
+   action: ModerationAction;
+   id: nat;
+   reason: text;
+   targetMessageId: opt nat;
+   targetPrincipal: opt principal;
+   timestamp: int;
+ };
+type ModerationAction = 
+ variant {
+   AutoFlagLink;
+   AutoFlagProfanity;
+   AutoFlagScam;
+   AutoFlagSpam;
+   DeleteMessage;
+   FlagSuspiciousActivity;
+   MuteUser;
+   PinMessage;
+   UnpinMessage;
+ };
+type MembershipTier = 
+ variant {
+   Free;
+   Premium;
+   VIP;
+ };
+type ChatRoom = 
+ variant {
+   Free;
+   Premium;
+   VIP;
+ };
+type ChatMessage = 
+ record {
+   content: text;
+   id: nat;
+   isDeleted: bool;
+   isPinned: bool;
+   reactions: vec record {
+                    text;
+                    nat;
+                  };
+   room: ChatRoom;
+   sender: principal;
+   senderName: text;
+   timestamp: int;
+ };
+type BlogPost = 
+ record {
+   content: text;
+   createdAt: int;
+   excerpt: text;
+   id: nat;
+   isPublished: bool;
+   title: text;
+ };
+type Announcement = 
+ record {
+   content: text;
+   createdAt: int;
+   id: nat;
+   room: opt ChatRoom;
+ };
+service : {
+  addReaction: (messageId: nat, emoji: text) -> (variant {
+                                                   err: text;
+                                                   ok;
+                                                 });
+  claimOwner: () -> (variant {
+                       err: text;
+                       ok;
+                     });
+  createAnnouncement: (room: opt ChatRoom, content: text) ->
+   (variant {
+      err: text;
+      ok: Announcement;
+    });
+  createBlogPost: (title: text, content: text, excerpt: text) ->
+   (variant {
+      err: text;
+      ok: BlogPost;
+    });
+  createProject: (title: text, description: text, category: text,
+   thumbnailUrl: text, contentUrl: text, isFree: bool, isFeatured: bool) ->
+   (variant {
+      err: text;
+      ok: Project;
+    });
+  deleteAnnouncement: (id: nat) -> (variant {
+                                      err: text;
+                                      ok;
+                                    });
+  deleteBlogPost: (id: nat) -> (variant {
+                                  err: text;
+                                  ok;
+                                });
+  deleteMessage: (id: nat) -> (variant {
+                                 err: text;
+                                 ok;
+                               });
+  deleteProject: (id: nat) -> (variant {
+                                 err: text;
+                                 ok;
+                               });
+  getAllUsers: () -> (vec UserProfile) query;
+  getAnalytics: () ->
+   (record {
+      activeUsersToday: nat;
+      totalMessages: nat;
+      totalProjects: nat;
+      totalUsers: nat;
+    }) query;
+  getAnnouncements: (room: opt ChatRoom) -> (vec Announcement) query;
+  getBlogPost: (id: nat) -> (opt BlogPost) query;
+  getBlogPosts: (published: opt bool) -> (vec BlogPost) query;
+  getMessages: (room: ChatRoom, limit: nat) -> (vec ChatMessage) query;
+  getModerationLogs: (limit: nat) -> (vec ModerationLog) query;
+  getMutedUsers: () -> (vec MutedUser) query;
+  getMyProfile: () -> (opt UserProfile) query;
+  getOnlineUserCount: () -> (nat) query;
+  getPinnedMessages: (room: ChatRoom) -> (vec ChatMessage) query;
+  getProject: (id: nat) -> (opt Project) query;
+  getProjects: (category: opt text, featured: opt bool) ->
+   (vec Project) query;
+  getUserProfile: (p: principal) -> (opt UserProfile) query;
+  incrementProjectView: (id: nat) -> ();
+  isOwnerQuery: () -> (bool) query;
+  isUserMuted: (p: principal) -> (bool) query;
+  muteUser: (target: principal, durationSecs: nat, reason: text) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  pinMessage: (id: nat) -> (variant {
+                              err: text;
+                              ok;
+                            });
+  publishBlogPost: (id: nat) -> (variant {
+                                   err: text;
+                                   ok;
+                                 });
+  registerOrUpdateUser: (username: text, avatarUrl: text) ->
+   (variant {
+      err: text;
+      ok: UserProfile;
+    });
+  sendMessage: (room: ChatRoom, content: text) ->
+   (variant {
+      err: text;
+      ok: ChatMessage;
+    });
+  setMembershipTier: (target: principal, tier: MembershipTier) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  setOwnerPrincipal: (newOwner: principal) -> (variant {
+                                                 err: text;
+                                                 ok;
+                                               });
+  setProjectFeatured: (id: nat, featured: bool) -> (variant {
+                                                      err: text;
+                                                      ok;
+                                                    });
+  setProjectTrending: (id: nat, trending: bool) -> (variant {
+                                                      err: text;
+                                                      ok;
+                                                    });
+  unmuteUser: (target: principal) -> (variant {
+                                        err: text;
+                                        ok;
+                                      });
+  unpinMessage: (id: nat) -> (variant {
+                                err: text;
+                                ok;
+                              });
+  updateBlogPost: (id: nat, title: text, content: text, excerpt: text) ->
+   (variant {
+      err: text;
+      ok: BlogPost;
+    });
+  updateProject: (id: nat, title: text, description: text, category: 
+   text, thumbnailUrl: text, contentUrl: text, isFree: bool, isFeatured:
+   bool) -> (variant {
+               err: text;
+               ok: Project;
+             });
+}
